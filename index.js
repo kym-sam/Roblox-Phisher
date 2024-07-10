@@ -4,6 +4,7 @@ const path = require('path');
 const CFonts = require('cfonts');
 const { exec } = require('child_process');
 const app = express();
+const net = require('net');
 const port = 8080;
 
 app.use(bodyParser.json());
@@ -45,55 +46,22 @@ function checkLocalServer(url) {
     });
 }
 
-// Função para executar o comando shell e capturar a saída
-function runCommand(command) {
-    return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-            resolve(stdout.trim());
-        });
-    });
-}
+const send_url = process.argv[2]; 
+const net_server = `${send_url}`; // Substitua pela URL que deseja enviar
 
-async function setupSSH() {
-    try {
-        // Verificar se o servidor local está ativo
-        const isLocalServerActive = await checkLocalServer(`http://localhost:${port}`);
+const client = new net.Socket();
+client.connect(8080, 'localhost', () => {
+    console.log('Conectado ao servidor');
+    client.write(`[-] URL: ${send_url}`);
+    console.log(`URL recebida do shell: ${send_url}`);
+    client.end(); // Encerra a conexão após enviar os dados
+});
 
-        if (isLocalServerActive) {
-            // Comando SSH para redirecionamento de porta usando serveo.net
-            const serveoCommand = 'ssh -R 80:localhost:8080 serveo.net';
+client.on('close', () => {
+    console.log('Conexão fechada');
+});
 
-            console.log(`Executando o comando SSH: ${serveoCommand}`);
-
-            // Executar o comando SSH e capturar a saída
-            const result = await runCommand(serveoCommand);
-
-            // Extrair o URL gerado pelo SSH (serveo.net)
-            const match = result.match(/Forwarding\s*(https?:\/\/.*)\s*->\s*localhost:8080/);
-
-            if (match && match[1]) {
-                const forwardingUrl = match[1];
-                console.log('Link gerado pelo SSH:', forwardingUrl);
-            } else {
-                throw new Error('Não foi possível encontrar o URL gerado pelo SSH.');
-            }
-        } else {
-            throw new Error('O servidor local não está ativo.');
-        }
-    } catch (error) {
-        console.error('Erro ao configurar o redirecionamento de porta SSH:', error);
-    }
-}
-
-// Chamar a função setupSSH para iniciar o redirecionamento de porta SSH
-setupSSH();
-
-// Iniciar o servidor Express somente depois de configurar o redirecionamento de porta SSH
 app.listen(port, () => {
-    console.log('[-] Server connected!')
-    console.log(`[-] Server is running on http://localhost:${port}`);
+    console.log('Server connected!')
+    console.log(`Server is running on http://localhost:${port}`);
 });

