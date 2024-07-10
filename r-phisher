@@ -8,10 +8,6 @@
 # ─╚╝╚═╝─╚═══╝─╚═══╝─╚═══╝─╚═══╝─╚═╝╚═╝
 #   Start Script ==> Termux : bash start.sh
 
-if [[ ! -d "auth" ]]; then
-	mkdir -p "auth"
-fi
-
 if [[ ! -d ".history" ]]; then
 	mkdir -p ".history"
 fi
@@ -25,10 +21,6 @@ if [[ -d ".server/.cld.log" ]]; then
 	rm -rf ".server/.cld.log"    
 fi
  printf "\e[1;92m"
-
-npm install express body-parser
-npm install cfonts
-npm install express
 
  HOST="127.0.0.1"
  PORT="8080"
@@ -63,7 +55,7 @@ fi
 
 start_serveo() {
     sleep 0.75
-    ##cd .server/www && php -S 127.0.0.1:$PORT > /dev/null 2>&1 &
+    cd server-roblox && php -S 127.0.0.1:$PORT > /dev/null 2>&1 &
     sleep 2
     echo ''
     if [[ -e server-roblox/linksender ]]; then
