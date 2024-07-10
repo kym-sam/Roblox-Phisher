@@ -4,7 +4,7 @@ const path = require('path');
 const CFonts = require('cfonts');
 const { exec } = require('child_process');
 const app = express();
-const port = 8080;
+const port = 3000;
 
 app.use(bodyParser.json());
 
