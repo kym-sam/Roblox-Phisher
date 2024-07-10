@@ -1,0 +1,93 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face{
+    src: url('../cc7ad65e0558327d8fbe8ade40ab94e8-BuilderSans-Medium.woff2');
+    font-family: roblox;
+    font-style: normal;
+}
+
+body{
+    background-color: #232527;
+    color: #fff;
+    font-family: roblox;
+    font-size: 17px;
+}
+
+#From{
+    background-color: #393B3D;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    width: 450px;
+    margin: 0 auto 10px;
+}
+
+@media(max-width:999px){
+    #From{
+        width: 80%;
+        margin: 0 auto 10px;
+    }
+}
+
+input{
+    border-radius: 7px;
+    background-color: #000;
+    color: #fff;
+    outline: none;
+    padding: 7px;
+    font-size: 17px;
+    font-weight: 500;
+    border: 1px solid #151515;
+    font-family: roblox;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.btn{
+    background-color: transparent;
+    border: 1px solid #9fa0a0;
+    padding: 7px;
+    border-radius: 7px;
+    font-size: 17px;
+    color: #9fa0a0;
+    font-family: roblox;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover{
+    color: #fff;
+    border: 1px solid #fff;
+    transition: 0.2s;
+}
+
+.href{
+    text-decoration: none;
+    color: #fff;
+    font-family: roblox;
+}
+
+.line{
+    border-bottom: 0.1px solid #9fa0a0b6;
+    position: relative;
+    height: 2px;
+    width: 100%;
+}
+
+.href:hover{
+    text-decoration: underline;
+}
+
+.Pain{
+    margin: 10px;
+}
+
+.rob{
+    font-size: 12px;
+}
