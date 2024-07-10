@@ -33,22 +33,7 @@ CFonts.say('Roblox', {
     maxLength: '0',     
 });
 
-
-function checkLocalServer(url) {
-    return new Promise((resolve, reject) => {
-        const http = require('http');
-        http.get(url, (resp) => {
-            resolve(true);
-        }).on('error', (err) => {
-            reject(false);
-        });
-    });
-}
-
-const send_url = process.argv[2]; 
-
 app.listen(port, () => {
     console.log('Server connected!')
     console.log(`Server is running on http://localhost:${port}`);
-    console.log(`URL recebida do shell: ${send_url}`);
 });

