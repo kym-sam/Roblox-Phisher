@@ -22,9 +22,6 @@ if [[ -d ".server/.cld.log" ]]; then
 fi
  printf "\e[1;92m"
 
- HOST="localhost"
- PORT="3000"
-
 whoami=$(command whoami)
 pwd=$(command pwd)
 date_time=$(date "+%Y-%m-%d %H:%M:%S")
@@ -37,7 +34,7 @@ if [[ $? -eq 0 ]]; then
 echo -e "\n\033[32mUser Conected!\033[37m"
 echo -e "WELCOME!"
 echo -e "Date : $date_time\nUser : $whoami"
-start_serveo
+node index.js
 else
 echo -e ""
 echo -e "\033[33mroblox \033[37mHello $whoami :)"
@@ -49,31 +46,6 @@ echo -e "\033[33mroblox \033[37mErro de Conexão| $date_time"
 echo -e "\033[33mroblox \033[37mVerifique a sua rede wi-fi..."
 start
 fi
-}
-
-start_serveo() {
-    sleep 0.75
-    sleep 2
-    echo ''
-    if [[ -e server-roblox/linksender ]]; then
-        rm -rf server-roblox/linksender
-    fi
-    $(which sh) -c 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -R 80:localhost:'$PORT' serveo.net 2> /dev/null > server-roblox/linksender ' &
-    sleep 7
-    send_url=$(grep -o "https://[0-9a-z]*\.serveo.net" server-roblox/linksender)
-    # Envia o send_url para o servidor Node.js via HTTP
-    curl -X POST -H "Content-Type: application/json" -d "{\"send_url\": \"$send_url\"}" http://localhost:3000/server
-    #curl -X POST -H "Content-Type: application/json" -d "{\"send_url\": \"http://example.com\"}" http://localhost:3000/server 
-    tt
-}
-
-tt(){
-    	while true; do
-		if [[ -e "server" ]]; then
-        echo -e "Servidor Ligado!"
-        fi
-        done
-			
 }
 
 start;

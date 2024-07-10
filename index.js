@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { exec, execSync } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 const CFonts = require('cfonts');
 const app = express();
-const port = 3000;
+const port = 8080;
 
 app.use(bodyParser.json());
 
@@ -32,15 +34,8 @@ CFonts.say('Roblox', {
     maxLength: '0',     
 });
 
-app.post('/server', (req, res) => {
-    const { send_url } = req.body;
-    console.log(`URL recebida via HTTP: ${send_url}`);
-    // Aqui você pode processar o send_url como necessário
-    res.sendStatus(200);
-});
-
 app.listen(port, () => {
-    console.log('command bash server.sh');
     console.log('Server connected!');
     console.log(`Server is running on http://localhost:${port}`);
+    console.log(`command ssh -R 80:localhost:${port} serveo.net`)
 });
