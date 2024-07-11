@@ -28,7 +28,7 @@ body{
 
 @media(max-width:999px){
     #From{
-        width: 80%;
+        width: 90%;
         margin: 0 auto 10px;
     }
 }
@@ -90,4 +90,18 @@ input{
 
 .rob{
     font-size: 12px;
+}
+
+.bottom{
+    text-align: center;
+    display: flex;
+    margin: 0 auto 10px;
+    justify-content: center;
+}
+
+.gt{
+    font-size: 16px;
+}
+.div-names{
+    margin: 10px;
 }
