@@ -68,7 +68,7 @@ server_site
 start_serveo
 command cfonts "roblox" -f pallet -c yellowBright white
 echo -e "Server is running on http://localhost:${PORT}"
-ECHO -e "Server connected!"
+echo -e "Server connected!"
 echo -e "\n\033[32mUser Conected!\033[37m"
 echo -e "WELCOME!"
 echo -e "\n\033[37mLink            \033[32m$send_url\033[37m"
